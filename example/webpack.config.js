@@ -45,6 +45,9 @@ module.exports = {
         new HtmlPlugin({
             template: path.resolve(__dirname, 'src/index.html')
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            'Inferno': 'inferno'
+        })
     ]
 };

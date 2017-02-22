@@ -24,45 +24,57 @@ const createRouter = (routes: Routes, history: any) => {
         return (next: Next) => (action: RouterAction) => {
             if (action.type === routerType) {
                 action.method && history[action.method].call(null, action.path);
-                for (let p of Object.keys(patterns)) {
-                    const { pattern, mapper } = patterns[p];
-                    const matched = pattern.match(action.path);
-                    if (matched) {
-                        return next(
-                            typeof mapper === 'function' ?
-                            mapper(matched) :
-                            {
-                                type: mapper,
-                                payload: matched
-                            }
-                        );
+                if (action.shouldDispatch)
+                    for (let p of Object.keys(patterns)) {
+                        const { pattern, mapper } = patterns[p];
+                        const matched = pattern.match(action.path);
+                        if (matched) {
+                            return next(
+                                typeof mapper === 'function' ?
+                                mapper(matched) :
+                                {
+                                    type: mapper,
+                                    payload: matched
+                                }
+                            );
+                        }
                     }
-                }
             }
             return next(action);
-        }
-    }
+        };
+    };
 
-    middleware.init = () => _store.dispatch({
-        type: routerType,
-        path: location.pathname
-    });
+    const reload = () => _store.dispatch(replace(location.pathname));
 
-    history.listen((_, method: string) => method === 'POP' && middleware.init());
+    history.listen((_, method: string) => method === 'POP' && reload());
+
     return middleware;
-}
+};
 
-const createMethod = (method: string) => (path: string): Action => ({
+const createMethod =
+(method: string, shouldDispatch: boolean = true) =>
+(path: string | number | typeof undefined): Action =>
+({
     path,
     method,
+    shouldDispatch,
     type: routerType,
 });
 
 const push = createMethod('push');
 const replace = createMethod('replace');
+const go = createMethod('go', false);
+const goBack = createMethod('goBack', false);
+const goForward = createMethod('goForward', false);
+const navigate = (url: string, isReplacing: boolean = false) =>
+    isReplacing ? replace(url) : push(url);
 
-export { 
+export {
     createRouter,
     push,
-    replace
+    replace,
+    navigate,
+    goBack,
+    go,
+    goForward
 };

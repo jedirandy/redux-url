@@ -3,7 +3,6 @@ const initState = {
 };
 
 const reducer = (state = initState, action) => {
-    console.log(action)
     switch (action.type) {
         case 'NOT_FOUND':
             return {
@@ -11,7 +10,7 @@ const reducer = (state = initState, action) => {
                 route: {
                     name: 'not found'
                 }
-            }
+            };
         case 'CHANGE_TODO':
             return {
                 ...state,
@@ -19,17 +18,17 @@ const reducer = (state = initState, action) => {
                     name: 'todos',
                     id: action.payload
                 }
-            }
+            };
         case 'HOME':
             return {
                 ...state,
                 route: {
                     name: 'home'
                 }
-            }
+            };
         default:
             return state;
     }
-}
+};
 
 export default reducer;

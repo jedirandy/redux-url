@@ -1,8 +1,8 @@
-import Inferno, { render } from 'inferno';
-import { createStore, applyMiddleware } from 'redux';
+import { render } from 'inferno';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'inferno-redux';
 import createHistory from 'history/createBrowserHistory';
-import { createRouter } from 'redux-simple-router';
+import { createRouter, navigate } from 'redux-simple-router';
 import reducer from './reducer';
 import App from './App';
 
@@ -12,13 +12,16 @@ const routes = {
     '*': 'NOT_FOUND'
 };
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const router = createRouter(routes, createHistory());
 const store = createStore(
     reducer,
-    applyMiddleware(router)
+    composeEnhancers(
+        applyMiddleware(router),
+    )
 );
 
-router.init();
+store.dispatch(navigate(location.pathname, false));
 
 render(
     <Provider store={store}>

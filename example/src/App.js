@@ -1,29 +1,42 @@
-import Inferno from 'inferno';
 import { connect } from 'inferno-redux';
-import { push } from 'redux-simple-router';
+import { navigate, goBack, goForward } from 'redux-simple-router';
 
-const App = ({ route, push }) =>
+const Content = (route) => {
+    if (route) {
+        if (route.name === 'home')
+            return <div>Home</div>;
+        if (route.name === 'todos')
+            return <div>Todo {route.id}</div>;
+    }
+    return <div>Not Found</div>;
+};
+
+const App = ({ route, navigate, goBack, goForward }) =>
 {
-    const HomeLink = <a href="/" onClick={e => {
+    const HomeLink = <a href="/" onClick={ e => {
         e.preventDefault();
-        push('/');
-    }}>Home</a>
+        navigate('/');
+    }}>Home</a>;
 
-    if (route && route.name === 'home')
-        return (
-            <div>
-                {HomeLink}
-            </div>
-        )
-    if (route && route.name === 'todos')
-        return <div>Todo {route.id}</div>
+    const Back = <a href="/" onClick={ e => {
+        e.preventDefault();
+        goBack();
+    }}>Back</a>;
+
+    const Forward = <a href="/" onClick={ e => {
+        e.preventDefault();
+        goForward();
+    }}>Forward</a>;
+
     return (
         <div>
+            { Back }
             { HomeLink }
-            <p>Not found</p>
+            { Forward }
+            { Content(route) }
         </div>
-    )
-}
+    );
+};
 const select = ({
     route
 }) => ({
@@ -31,7 +44,9 @@ const select = ({
 });
 
 const actions = dispatch => ({
-    push: path => dispatch(push(path))
-})
+    navigate: path => dispatch(navigate(path)),
+    goBack: () => dispatch(goBack()),
+    goForward: () => dispatch(goForward())
+});
 
-export default connect(select, actions)(App)
+export default connect(select, actions)(App);

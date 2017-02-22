@@ -1,11 +1,13 @@
 # Redux simple router
 
+A redux middleware that does one simple job: matches a route and dispatch an action.
+
 ## Usage
 
 ```javascript
 import createHistory from 'history/createBrowserHistory'; // choose a history implementation
 import { createStore, applyMiddleware } from 'redux';
-import { createRouter, push } from 'redux-simple-router';
+import { createRouter, navigate } from 'redux-simple-router';
 
 const routes = {
     '/': 'HOME', // when url is matched, will dispatch an action of type home, payload is the matched result
@@ -19,8 +21,7 @@ const store = createStore(
     applyMiddleware(router)
 );
 
-// for working with reloading
-router.init();
+store.dispatch(navigate(location.pathname)); // for it to work when refreshed
 
-store.dispatch(push('/todos/123')); // change route
+store.dispatch(navigate('/todos/123')); // change route
 ```
