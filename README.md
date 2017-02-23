@@ -1,4 +1,5 @@
 # Redux simple router
+[![Build Status](https://travis-ci.org/jedirandy/redux-simple-router.svg?branch=master)](https://travis-ci.org/jedirandy/redux-simple-router)
 
 A redux middleware that does one simple job: matches a route and dispatch an action.
 
@@ -21,7 +22,7 @@ const store = createStore(
     applyMiddleware(router)
 );
 
-store.dispatch(navigate(location.pathname)); // for it to work when refreshed
+store.dispatch(navigate(location.pathname, false)); // for state to be restored from URL when refreshed
 
 store.dispatch(navigate('/todos/123')); // change route
 ```
