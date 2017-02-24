@@ -9,7 +9,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
-        library: 'ReduxSimpleRouter',
+        library: 'ReduxURL',
         libraryTarget: 'umd'
     },
     module: {

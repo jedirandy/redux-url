@@ -1,5 +1,6 @@
 // @flow
 import UrlPattern from 'url-pattern';
+
 import type {
     Store,
     Routes,
@@ -8,7 +9,7 @@ import type {
     Action
 } from './types';
 
-const routerType = '@@redux-simple-router';
+const routerType = '@@redux-url';
 
 const createRouter = (routes: Routes, history: any) => {
     const patterns = Object.keys(routes).reduce((result, route) => ({
@@ -76,5 +77,6 @@ export {
     navigate,
     goBack,
     go,
-    goForward
+    goForward,
+    routerType
 };
