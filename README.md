@@ -1,4 +1,5 @@
-# redux-url
+redux-url
+=====
 
 [![Build Status](https://travis-ci.org/jedirandy/redux-url.svg?branch=master)](https://travis-ci.org/jedirandy/redux-url)
 [![npm module](https://badge.fury.io/js/redux-url.svg)](https://www.npmjs.org/package/redux-url)

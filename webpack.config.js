@@ -12,6 +12,20 @@ module.exports = {
         library: 'ReduxURL',
         libraryTarget: 'umd'
     },
+    externals: {
+        'qs': {
+            commonjs: 'qs',
+            commonjs2: 'qs',
+            amd: 'qs',
+            root: 'Qs'
+        },
+        'url-pattern': {
+            commonjs: 'url-pattern',
+            commonjs2: 'url-pattern',
+            amd: 'url-pattern',
+            root: 'UrlPattern'
+        }
+    },
     module: {
         loaders: [
             {

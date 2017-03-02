@@ -1,7 +1,8 @@
 {
   "name": "redux-url",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "main": "dist/index.js",
+  "module": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jedirandy/redux-url.git"
@@ -11,13 +12,21 @@
     "flow": "flow check src",
     "lint": "eslint src",
     "build": "webpack",
+    "build-umd": "webpack --outputPath=./umd",
     "test": "karma start"
   },
   "keywords": [
     "redux",
     "redux-middleware",
     "middleware",
-    "url"
+    "url",
+    "router"
+  ],
+  "files": [
+    "*.md",
+    "src",
+    "umd",
+    "dist"
   ],
   "dependencies": {
     "qs": "^6.3.1",
@@ -48,6 +57,6 @@
     "webpack": "^2.2.1"
   },
   "peerDependencies": {
-    "history": "^4.0.0"
+    "history": ">=3.0.0"
   }
 }
