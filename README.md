@@ -1,5 +1,4 @@
-redux-url
-=====
+# redux-url
 
 [![Build Status](https://travis-ci.org/jedirandy/redux-url.svg?branch=master)](https://travis-ci.org/jedirandy/redux-url)
 [![npm module](https://badge.fury.io/js/redux-url.svg)](https://www.npmjs.org/package/redux-url)
@@ -33,7 +32,7 @@ const store = createStore(
     applyMiddleware(router)
 );
 
-store.dispatch(navigate(location.pathname, false)); // for state to be restored from URL when refreshed
+store.dispatch(navigate(location.pathname, true)); // for state to be restored from URL when refreshed
 
 store.dispatch(navigate('/todos/123')); // navigate to '/todos/123'
 ```
