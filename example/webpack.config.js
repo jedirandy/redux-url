@@ -33,7 +33,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'redux-simple-router': path.resolve(__dirname, '../src')
+            'redux-url': path.resolve(__dirname, '../src')
         }
     },
     devtool: 'source-map',

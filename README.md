@@ -21,8 +21,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { createRouter, navigate } from 'redux-url';
 
 const routes = {
-    '/': 'HOME', // when url is matched, will dispatch an action of type 'HOME', the payload is the matched result
-    '/todos/:id': ({ id }) => ({ type: 'CHANGE_TODO', payload: id }), // you can also pass a function to custom the action, the matched result will be passed in
+    '/': 'HOME', // when url is matched, will dispatch an action of type 'HOME', the payload contains matched params and query
+    '/todos/:id': ({ id }, query) => ({ type: 'CHANGE_TODO', payload: id, query }), // you can also pass a function to custom the action, the matched params and query will be passed in
     '*': 'NOT_FOUND'
 };
 
@@ -44,9 +44,19 @@ store.dispatch(navigate('/todos/123')); // navigate to '/todos/123'
   creates the middleware
   - arguments
     * routes (*object*) : URL patterns to be mapped, where values can be:
-      * string: when matched, an action will be dispatched of which the is the given string, the payload will be the matched result
+      * *string*: when matched, an action will be dispatched of which the type is the given string, and the payload has the following shape:
 
-      * function: a function that takes the matched result and returns a
+      ```javascript
+        {
+          type: string,
+          payload: {
+            params: object,
+            query: object
+          }
+        }
+      ```
+
+      * *function*: a function that takes the matched params and query, returns an action
 
     * history: the history object created from lib [`history`](https://github.com/ReactTraining/history),
     such as `createBrowserHistory`

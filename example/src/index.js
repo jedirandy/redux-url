@@ -2,7 +2,7 @@ import { render } from 'inferno';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'inferno-redux';
 import createHistory from 'history/createBrowserHistory';
-import { createRouter, navigate } from 'redux-simple-router';
+import { createRouter, navigate } from 'redux-url';
 import reducer from './reducer';
 import App from './App';
 

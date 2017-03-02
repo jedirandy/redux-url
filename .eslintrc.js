@@ -3,7 +3,8 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
     "parser": "babel-eslint",
     "extends": "eslint:recommended",
@@ -36,5 +37,8 @@ module.exports = {
             "always"
         ],
         "react/jsx-uses-vars": 1
+    },
+    "globals": {
+        "expect": true
     }
 };

@@ -7,13 +7,14 @@ describe('tests', () => {
         '/': 'HOME',
         '/todos/:id': ({ id }) => ({ type: 'CHANGE_TODO', payload: parseInt(id) }),
         '*': 'NOT_FOUND'
-    }
+    };
 
     const reducer = (state = {}, action) => {
         switch (action.type) {
             case 'HOME': 
                 return {
-                    page: 'HOME'
+                    page: 'HOME',
+                    query: action.payload.query
                 };
             case 'CHANGE_TODO':
                 return {
@@ -23,12 +24,12 @@ describe('tests', () => {
             case 'NOT_FOUND':
                 return {
                     page: 'NOT_FOUND',
-                    url: action.payload._
-                }
+                    url: action.payload.params._
+                };
             default:
                 return state;
         }
-    }
+    };
 
     let store;
     let history;
@@ -78,5 +79,15 @@ describe('tests', () => {
         expect(history.index).to.equal(0);
         store.dispatch(go(2));
         expect(history.index).to.equal(2);
+    });
+
+    it('parses queries', () => {
+        store.dispatch(navigate('/?last=10'));
+        expect(store.getState()).to.deep.equal({
+            page: 'HOME',
+            query: {
+                last: '10'
+            }
+        });
     });
 });

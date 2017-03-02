@@ -51,6 +51,10 @@ module.exports = function(config) {
             'karma-mocha',
             'karma-chai',
             'karma-phantomjs-launcher'
-        ]
+        ],
+        browserConsoleLogOptions: {
+            terminal: true,
+            level: ''
+        }
     });
 };

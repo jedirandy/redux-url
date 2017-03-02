@@ -1,5 +1,5 @@
 import { connect } from 'inferno-redux';
-import { navigate, goBack, goForward } from 'redux-simple-router';
+import { navigate, goBack, goForward } from 'redux-url';
 
 const Content = (route) => {
     if (route) {

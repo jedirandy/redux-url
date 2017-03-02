@@ -1,18 +1,17 @@
 {
   "name": "redux-url",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/index.js",
-  "repository": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jedirandy/redux-url.git"
+  },
   "license": "MIT",
   "scripts": {
     "flow": "flow check src",
     "lint": "eslint src",
     "build": "webpack",
     "test": "karma start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jedirandy/redux-url.git"
   },
   "keywords": [
     "redux",
@@ -21,6 +20,7 @@
     "url"
   ],
   "dependencies": {
+    "qs": "^6.3.1",
     "url-pattern": "^1.0.3"
   },
   "devDependencies": {

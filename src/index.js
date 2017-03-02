@@ -1,5 +1,6 @@
 // @flow
 import UrlPattern from 'url-pattern';
+import qs from 'qs';
 
 import type {
     Store,
@@ -9,7 +10,7 @@ import type {
     Action
 } from './types';
 
-const routerType = '@@redux-url';
+const routerType: string = '@@redux-url';
 
 const createRouter = (routes: Routes, history: any) => {
     const patterns = Object.keys(routes).reduce((result, route) => ({
@@ -28,14 +29,18 @@ const createRouter = (routes: Routes, history: any) => {
                 if (action.shouldDispatch)
                     for (let p of Object.keys(patterns)) {
                         const { pattern, mapper } = patterns[p];
-                        const matched = pattern.match(action.path);
-                        if (matched) {
+                        const params = pattern.match(history.location.pathname);
+                        const query = qs.parse(history.location.search.replace(/^\?/, ''));
+                        if (params) {
                             return next(
                                 typeof mapper === 'function' ?
-                                mapper(matched) :
+                                mapper(params, query) :
                                 {
                                     type: mapper,
-                                    payload: matched
+                                    payload: {
+                                        params,
+                                        query
+                                    }
                                 }
                             );
                         }
