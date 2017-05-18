@@ -7,7 +7,8 @@ import type {
     Routes,
     RouterAction,
     Next,
-    Action
+    Action,
+    Mapper
 } from './types';
 
 const routerType: string = '@@redux-url';
@@ -24,8 +25,9 @@ const createRouter = (routes: Routes, history: any) => {
     const middleware = (store: Store) => {
         _store = store;
         return (next: Next) => (action: RouterAction) => {
-            if (action.type === routerType) {
-                action.method && history[action.method].call(null, action.path);
+            const { type, method, path } = action;
+            if (type === routerType) {
+                method && history[method].call(null, path);
                 if (action.shouldDispatch)
                     for (let p of Object.keys(patterns)) {
                         const { pattern, mapper } = patterns[p];
@@ -34,12 +36,13 @@ const createRouter = (routes: Routes, history: any) => {
                         if (params) {
                             return next(
                                 typeof mapper === 'function' ?
-                                mapper(params, query) :
+                                (mapper: Mapper)(params, query, path) :
                                 {
                                     type: mapper,
                                     payload: {
                                         params,
-                                        query
+                                        query,
+                                        path
                                     }
                                 }
                             );

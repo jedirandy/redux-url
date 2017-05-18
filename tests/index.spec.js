@@ -6,6 +6,7 @@ describe('tests', () => {
     const routes = {
         '/': 'HOME',
         '/todos/:id': ({ id }) => ({ type: 'CHANGE_TODO', payload: parseInt(id) }),
+        '/user/:id': 'CHANGE_USER',
         '*': 'NOT_FOUND'
     };
 
@@ -20,6 +21,11 @@ describe('tests', () => {
                 return {
                     page: 'TODO',
                     id: action.payload
+                };
+            case 'CHANGE_USER':
+                return {
+                    page: 'USER',
+                    ...action.payload
                 };
             case 'NOT_FOUND':
                 return {
@@ -88,6 +94,16 @@ describe('tests', () => {
             query: {
                 last: '10'
             }
+        });
+    });
+
+    it('parses queries', () => {
+        store.dispatch(navigate('/user/123?detail=true'));
+        expect(store.getState()).to.deep.equal({
+            page: 'USER',
+            params: { id: '123' },
+            query: { detail: 'true' },
+            path: '/user/123?detail=true'
         });
     });
 });

@@ -20,3 +20,5 @@ export type Store = {
     dispatch: Action => any,
     getState: () => any
 };
+
+export type Mapper = (Object, Object, string) => Action;
