@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/jedirandy/redux-url.svg?branch=master)](https://travis-ci.org/jedirandy/redux-url)
 [![npm module](https://badge.fury.io/js/redux-url.svg)](https://www.npmjs.org/package/redux-url)
 
-A redux middleware that does one simple job: matches a url pattern and dispatch an action.
+A redux middleware for synchronizing the url with your redux store's state. It provides a set of action creators for changing the url, and if the url matches a user-defined route, an action will be dispatched, provided with information such as parameters and queries.
 
 ## Install
 
