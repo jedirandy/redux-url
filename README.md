@@ -11,8 +11,6 @@ A redux middleware for synchronizing the url with your redux store's state. It p
 npm install --save redux-url
 ```
 
-Note that [`history`](https://github.com/ReactTraining/history) is needed for it to work correctly.
-
 ## Usage
 
 ```javascript
