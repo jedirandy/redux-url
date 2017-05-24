@@ -41,7 +41,7 @@ const App = ({ route, navigate, goBack, goForward }) =>
         <div>
             <a href="/" onClick={ e => {
                 e.preventDefault();
-                navigate(`/todos/${id}`);
+                navigate(`/todos/${id}?status=active`);
             }}>Todo {id}</a>
         </div>
     );

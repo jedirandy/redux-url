@@ -2,7 +2,7 @@ import { render } from 'inferno';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'inferno-redux';
 import createHistory from 'history/createBrowserHistory';
-import { createRouter, navigate } from 'redux-url';
+import { createRouter } from 'redux-url';
 import reducer from './reducer';
 import App from './App';
 
@@ -21,7 +21,7 @@ const store = createStore(
     )
 );
 
-store.dispatch(navigate(location.pathname, false));
+router.sync();
 
 render(
     <Provider store={store}>

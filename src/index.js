@@ -53,10 +53,13 @@ const createRouter = (routes: Routes, history: any) => {
         };
     };
 
-    const reload = () => _store.dispatch(replace(location.pathname));
+    // synchronize the state with the current location
+    const sync = () => _store.dispatch(replace(location.pathname + location.search));
 
-    history.listen((_, method: string) => method === 'POP' && reload());
+    // handles the situation when the user clicks on navigation buttons
+    history.listen((_, method: string) => method === 'POP' && sync());
 
+    middleware.sync = sync;
     return middleware;
 };
 
