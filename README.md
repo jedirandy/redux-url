@@ -30,9 +30,10 @@ const store = createStore(
     applyMiddleware(router)
 );
 
-store.dispatch(navigate(location.pathname, true)); // In order to restore the state from the URL when refreshed
+router.sync(); // In order to restore the state from the URL when refreshed
 
 store.dispatch(navigate('/todos/123')); // navigate to '/todos/123'
+
 ```
 
 ## API
@@ -66,7 +67,11 @@ store.dispatch(navigate('/todos/123')); // navigate to '/todos/123'
 
   - returns
 
-    the middleware
+    the middleware which provides the following methods:
+
+    * `sync()`:
+
+    synchronize the current url with the state, this is useful for handling the situation when the page is refreshed
 
 * `navigate(path: string, replace: boolean = false)`:
 
