@@ -1,12 +1,13 @@
 import { connect } from 'inferno-redux';
 import { navigate, goBack, goForward } from 'redux-url';
+import Link from './Link';
 
 const renderContent = (route) => {
     if (route) {
         if (route.name === 'home')
             return <div>Current: Home</div>;
         if (route.name === 'todos')
-            return <div>Current: Todo {route.id}</div>;
+            return <div>Current: Todo {route.id}, status: {route.status}</div>;
     }
     return <div>Current: Not Found</div>;
 };
@@ -37,12 +38,9 @@ const App = ({ route, navigate, goBack, goForward }) =>
         </button>
     );
 
-    const createTodo = (id: String) => (
+    const createTodo = (id, status) => (
         <div>
-            <a href="/" onClick={ e => {
-                e.preventDefault();
-                navigate(`/todos/${id}?status=active`);
-            }}>Todo {id}</a>
+            <Link to={`/todos/${id}?status=${status}`}>Todo {id}</Link>
         </div>
     );
 
@@ -51,8 +49,9 @@ const App = ({ route, navigate, goBack, goForward }) =>
             { Back }
             { HomeLink }
             { Forward }
-            { createTodo(1) }
-            { createTodo(2) }
+            { createTodo(1, 'active') }
+            { createTodo(2, 'active') }
+            { createTodo(3, 'done') }
             { renderContent(route) }
         </div>
     );

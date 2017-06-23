@@ -8,7 +8,7 @@ import App from './App';
 
 const routes = {
     '/': 'HOME',
-    '/todos/:id': ({ id }) => ({ type: 'CHANGE_TODO', payload: id }),
+    '/todos/:id': ({ id }, { status }) => ({ type: 'CHANGE_TODO', payload: { id, status } }),
     '*': 'NOT_FOUND'
 };
 

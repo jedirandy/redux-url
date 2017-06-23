@@ -16,7 +16,8 @@ const reducer = (state = initState, action) => {
                 ...state,
                 route: {
                     name: 'todos',
-                    id: action.payload
+                    id: action.payload.id,
+                    status: action.payload.status
                 }
             };
         case 'HOME':
