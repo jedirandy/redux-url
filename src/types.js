@@ -9,7 +9,8 @@ export type Action = {
 export type RouterAction = {
     type: string,
     path: string,
-    method: ?string
+    method: ?string,
+    shouldDispatch: ?bool
 };
 
 export type Routes = {
