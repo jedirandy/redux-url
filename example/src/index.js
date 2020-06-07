@@ -1,7 +1,8 @@
-import { render } from 'inferno';
+import React from 'react';
+import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'inferno-redux';
-import createHistory from 'history/createBrowserHistory';
+import { Provider } from 'react-redux';
+import { createBrowserHistory as createHistory } from 'history';
 import { createRouter } from 'redux-url';
 import reducer from './reducer';
 import App from './App';

@@ -1,4 +1,5 @@
-import { connect } from 'inferno-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { navigate } from 'redux-url';
 
 const Link = ({

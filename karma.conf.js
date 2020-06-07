@@ -1,8 +1,8 @@
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
         basePath: '.',
         singleRun: false,
-        browsers: ['PhantomJS'],
+        browsers: ['ChromeHeadless'],
         frameworks: ['mocha', 'chai'],
         files: [
             'node_modules/babel-polyfill/dist/polyfill.js',
@@ -18,19 +18,25 @@ module.exports = function(config) {
             'src/*.js': ['webpack']
         },
         webpack: {
+            mode: 'development',
             module: {
-                loaders: [
+                rules: [
                     {
                         test: /\.js$/,
-                        loader: 'babel-loader',
-                        query: {
-                            presets: ['es2015'],
-                            plugins: [
-                                'transform-object-rest-spread',
-                                'transform-class-properties',
-                                'transform-flow-strip-types'
-                            ]
-                        }
+                        use: [
+                            {
+                                loader: 'babel-loader',
+                                options: {
+                                    presets: ['@babel/preset-env'],
+                                    plugins: [
+                                        '@babel/plugin-proposal-object-rest-spread',
+                                        'transform-class-properties',
+                                        'transform-flow-strip-types'
+                                    ]
+                                }
+                            }
+                        ],
+                        exclude: /node_modules/
                     }
                 ]
             },
@@ -50,7 +56,7 @@ module.exports = function(config) {
             'karma-webpack',
             'karma-mocha',
             'karma-chai',
-            'karma-phantomjs-launcher'
+            'karma-chrome-launcher'
         ],
         browserConsoleLogOptions: {
             terminal: true,

@@ -26,19 +26,24 @@ module.exports = {
             root: 'UrlPattern'
         }
     },
+    mode: 'production',
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015'],
-                    plugins: [
-                        'transform-object-rest-spread',
-                        'transform-class-properties',
-                        'transform-flow-strip-types'
-                    ]
-                },
+                use: [
+                    {
+                        loader: 'babel-loader' ,
+                        options: {
+                            presets: ['@babel/preset-env'],
+                            plugins: [
+                                '@babel/plugin-proposal-object-rest-spread',
+                                'transform-class-properties',
+                                'transform-flow-strip-types'
+                            ]
+                        }
+                    }
+                ],
                 exclude: /node_modules/
             }
         ]

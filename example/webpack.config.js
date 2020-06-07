@@ -14,22 +14,25 @@ module.exports = {
         filename: '[name].js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015'],
-                    plugins: [
-                        'transform-object-rest-spread',
-                        'transform-class-properties',
-                        'transform-flow-strip-types',
-                        require.resolve('babel-plugin-inferno')
-                    ]
-                },
+                use: [
+                    {
+                        loader: 'babel-loader' ,
+                        options: {
+                            presets: ['@babel/preset-env', '@babel/preset-react'],
+                            plugins: [
+                                '@babel/plugin-proposal-object-rest-spread',
+                                'transform-class-properties',
+                                'transform-flow-strip-types',
+                            ]
+                        }
+                    }
+                ],
                 exclude: /node_modules/
             }
-        ],
+        ]
     },
     resolve: {
         alias: {
@@ -46,8 +49,5 @@ module.exports = {
             template: path.resolve(__dirname, 'src/index.html')
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.ProvidePlugin({
-            'Inferno': 'inferno'
-        })
     ]
 };
