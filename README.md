@@ -3,7 +3,9 @@
 [![Build Status](https://travis-ci.org/jedirandy/redux-url.svg?branch=master)](https://travis-ci.org/jedirandy/redux-url)
 [![npm module](https://badge.fury.io/js/redux-url.svg)](https://www.npmjs.org/package/redux-url)
 
-A redux middleware for synchronizing the url with your redux store's state. It provides a set of action creators for changing the url, and if the url matches a user-defined route, an action will be dispatched, provided with information such as parameters and query.
+A redux middleware for synchronizing the url with your redux store's state. It provides a set of action creators for changing the url, and if the url matches a user-defined route, an action will be dispatched with some metadata of the url such as parameters and query.
+
+It works with redux 3.x, 4.x
 
 ## Install
 
@@ -14,7 +16,7 @@ npm install --save redux-url
 ## Usage
 
 ```javascript
-import createHistory from 'history/createBrowserHistory'; // choose a history implementation
+import { createBrowserHistory as createHistory } from 'history'; // choose a history implementation
 import { createStore, applyMiddleware } from 'redux';
 import { createRouter, navigate } from 'redux-url';
 
