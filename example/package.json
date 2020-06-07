@@ -16,17 +16,17 @@
     "babel-plugin-inferno": "^6.1.1",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "html-webpack-plugin": "^4.3.0",
-    "url-pattern": "^1.0.3",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "history": "^4.5.1",
+    "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "url-pattern": "^1.0.3"
   }
 }
