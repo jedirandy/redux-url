@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "history": ">=3.0.0",
-    "qs": ">=6.0.0",
+    "qs": ">=6.9.7",
     "url-pattern": "^1.0.3"
   },
   "devDependencies": {
